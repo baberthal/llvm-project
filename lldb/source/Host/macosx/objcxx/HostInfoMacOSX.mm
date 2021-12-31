@@ -45,6 +45,9 @@
 #ifndef CPU_TYPE_ARM64
 #define CPU_TYPE_ARM64 (CPU_TYPE_ARM | CPU_ARCH_ABI64)
 #endif
+#ifndef CPU_SUBTYPE_ARM64E
+#define CPU_SUBTYPE_ARM64E ((cpu_subtype_t) 2)
+#endif
 
 #ifndef CPU_TYPE_ARM64_32
 #define CPU_ARCH_ABI64_32 0x02000000
@@ -272,8 +275,8 @@ void HostInfoMacOSX::ComputeHostArchitectureSupport(ArchSpec &arch_32,
       arch_32.SetArchitecture(eArchTypeMachO, cputype & ~(CPU_ARCH_MASK),
                               cpusubtype32);
 
-      if (cputype == CPU_TYPE_ARM || 
-          cputype == CPU_TYPE_ARM64 || 
+      if (cputype == CPU_TYPE_ARM ||
+          cputype == CPU_TYPE_ARM64 ||
           cputype == CPU_TYPE_ARM64_32) {
 // When running on a watch or tv, report the host os correctly
 #if defined(TARGET_OS_TV) && TARGET_OS_TV == 1
